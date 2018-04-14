@@ -1,0 +1,23 @@
+<div class="closed-request-header" id="closed-header">
+    <h5 class="closed-details" style="color: white; "><strong>Request ID: </strong><%=@request.id%></h5>
+      <h5 class="closed-details" style="color: white;"><strong>Created:  </strong><%=@request.created_at.strftime("%A,  %B %d @ %H:%M:%S")%></h5>
+    <h5 class="closed-details" style="color: white;"><strong>Request Closed:  </strong><%=@request.time_completed.strftime("%A,  %B %d @ %H:%M:%S") %></h5>
+    <h6 class="closed-header"  style="color: white;"><strong># Samples:  </strong><%= @request.samples.count %></h6>
+</div>
+<div class="uk-background-muted">
+<table class="uk-table uk-table-divider" >
+    <tr>
+        <th>Sample ID  </th><th>Tank   </th><th>Lot   </th><th>Sample Size </th><th>Time Completed</th>
+    </tr>
+         <% @request.samples.each do |sample|%>
+    <tr class="sample-row">
+        <td><%=sample.id%></td><td><%=sample.tank%>    </td><td> <%=sample.lot_id%>    </td><td><%=sample.sample_size%></td>
+            <%if sample.empty?%>
+                <td>TANK EMPTY</td>
+            <%elsif sample.completed?%>
+                <td><%=sample.time_completed.strftime("%A,  %B %d @ %H:%M:%S")%></td>
+             <%end%>
+    </tr>
+        <%end%>
+</table>
+</div>

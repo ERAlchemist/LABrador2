@@ -1,0 +1,83 @@
+<div class="row clearfix">
+	
+	<% if sample.empty? %>
+		<div class="complete">
+			
+				<img src="https://png.icons8.com/windows/30/000000/hibernate.png">
+			<br><br>
+			<%=sample.sample_size%>
+			
+		</div>
+		
+		<div class = "empty" id=<%=sample.id%>>
+			<p>TANK <%= sample.tank%> IS EMPTY</p>
+		</div>
+		<div class="right-block">
+			<div class="set-empty">
+				<%= link_to remove_empty_request_sample_path(@request, sample.id), method: :patch do %>
+					<span uk-tooltip="title: Undo Empty" ><%=image_tag("minus-sign-32.png")%></span>
+				<% end %>
+			</div>
+			<div class="trash"  uk-tooltip="title: Delete Sample">
+				<%= link_to request_sample_path(@request, sample.id), method: :delete, data: { confirm: "Are you sure?" } do %>
+					<span uk-tooltip="title: Delete Sample"><%=image_tag("trash-64.png")%></span>
+				<% end %>
+			</div>
+		</div>
+	<%end%>
+	<% if sample.completed? %>
+		<div class="complete">
+			<%= link_to remove_complete_request_sample_path(@request, sample.id), method: :patch do %>
+				<span  uk-tooltip="title: Undo Complete"><%=image_tag("Doc_Ex-64.png")%></span>
+	        	<% end %><br><br>
+			<%=sample.sample_size%>
+		</div>
+		<div class="completed" id=<%=sample.id%>>
+			<p style="opacity: 0.4;">
+				<strike><%= sample.tank %></strike>|
+				   <strike><%= sample.lot_id %></strike>
+				 <span uk-icon="icon: check; ratio: 2"></span>
+				<img src="https://png.icons8.com/nolan/30/000000/checkmark.png">
+			</p>
+			<li<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHMSURBVGhD7djBK2VhHMbxy8gChYXQxEiJlL3EanajWcnaWIyFYikLyj+glBRZKWUpstXU2EhZMIvZKwuLaULNIOL7nJw63Xvf2733LN738nvqU973uPo9nXPuPVfG8g4yi2s8O5yhF0GnGY/IVyBpB0FnABr0PFrlZhg6fhStAk5c5Fe0ys0IKqJIHe6gYbe0kUg7/kLHNrURer5Dw2ZfXvFldYk2bYQe131SMfdHHCsSWqxIaLEiIUUfetvQwHo4TGYI2teH4jdUIchM4hYa9gHzSKYBJ9Bx+YmPCCoaOh5wH5+QLzoL47iCfvcC3QgiY9BQenyf0kYRacEP6HW/UQ+vacQfaKBpbZQQPWCeQq9d1obPzEGDHEar0tOPJ/yDzpK3HENFvkSr8nIA/Y2JaOUh1dB9IU3oRB86UItiMwMVWY9WHtIKDaBL4/7155jWOlt6N1PBQvkKvWY3WnmIBkwO76IztodRfEB24k98XWJeUmyRJH07XIXepj9jEAvQsYoqUogVSRsr4mBF0saKOFiRtLEiDlYkbayIgxVJGyviYEXSxoo4eCtSg//IN1Q51uAti8g3VKlu0AOv0f+lVrBRpiV0wfKGksm8AMpJOO37/krXAAAAAElFTkSuQmCC">
+			<%=sample.sample_size%> Sample of tank <%= sample.tank %> collected:<br> <%= sample.time_completed.strftime("%A,  %B %d @ %H:%M:%S")%></li>
+		</div>
+		<div class="right-block">
+			<div class="set-empty">
+				
+					<img src="https://png.icons8.com/nolan/30/000000/high-priority.png">
+				
+			</div>
+			<div class="trash">
+				<%= link_to request_sample_path(@request, sample.id), method: :delete, data: { confirm: "Are you sure?" } do %>
+					<span uk-tooltip="title: Delete Sample"><%=image_tag("trash-64.png")%></span>
+						<% end %>
+			</div>
+		</div>
+	<% elsif !sample.empty? %>
+		<div class="complete">
+			<span  uk-tooltip="title: Mark Sample Complete"><%= link_to complete_request_sample_path(@request, sample.id), method: :patch do %>
+				
+				<%=image_tag('blueCheck-64.png')%></span>
+	        	<% end %><br><br>
+				
+			<%=sample.sample_size%>
+		</div>
+		<div class="sample" id=<%=sample.id%>>
+			<p><%= sample.tank %></p>
+			<%= sample.lot_id %>  
+		</div>
+		<div class="right-block">
+			<div class="set-empty">
+				<%= link_to set_as_empty_request_sample_path(@request, sample.id),  method: :patch do %>
+					<span  uk-tooltip="title: Mark Tank Empty"><%= image_tag("empty.png")%></span>
+				<% end %>
+			</div>
+			<div class="trash">
+				<%= link_to request_sample_path(@request, sample.id), method: :delete, data: { confirm: "Are you sure?" } do %>
+					<span uk-tooltip="title: Delete Sample"><%=image_tag("trash-64.png")%></span>
+					<% end %>
+			</div>
+		</div>
+	<% end %>
+</div>

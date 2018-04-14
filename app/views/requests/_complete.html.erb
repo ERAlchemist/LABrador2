@@ -1,0 +1,12 @@
+<div class="hidden">
+  <% @complete_requests.reverse.each do |request| %>
+    <div class="completed-request">
+      <div class="index_row clearfix">
+          <h2 class="request_title"><strike><%= link_to request.title, request %></strike><%=image_tag('blueCheck-64.png')%></h2>
+        <p class="request_sub_title"><strike><%= request.description %></strike><br>
+              Due: <%= request.due_date.strftime("%A, %B %d")%><br>
+              Completed: <%= request.time_completed.strftime("%A,  %B %d @ %H:%M:%S")%></p>
+      </div>
+    </div>
+  <% end %>
+</div>

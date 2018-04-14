@@ -1,0 +1,43 @@
+<%= form_for(@request) do |f| %>
+  <% if @request.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(request.errors.count, "error") %> prohibited this request from being saved:</h2>
+
+      <ul>
+      <% request.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div><br>
+
+   <div class="field">
+   <label uk-tooltip="Date this request is expected to be completed">Due Date</label>
+    <%= f.date_select :due_date %>
+  </div><br>
+
+    <div class="field" id="recurring" >
+      <label uk-tooltip="title: If set to true a new request will be generated with the same title, description, and samples with a due date one interval length after current due date after current request closes"> 
+        Is Recurring?
+      </label>
+    <%= f.select :is_recurring, [true,false], :selected => false %>
+  
+  </div><br>
+    <div class="field" id="interval" style="display:none">
+    <%= f.label :recurrence_interval %>
+    <%= f.select :recurrence_interval, [1,2,3,4,5,6,7] %><label> day(s)</label>
+  </div><br>
+  <div class="actions" id="new-request">
+    <%= f.submit %>
+  </div>
+<% end %>

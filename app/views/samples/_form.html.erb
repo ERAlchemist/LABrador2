@@ -1,0 +1,26 @@
+<% if @request.time_completed == nil%>
+  <form class="new_sample" id="new_sample" action="/requests/<%=@request.id%>/samples" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="EqWOFSvl+TibILmopmoMAxXSa/xhseyu8Q0bF2S70J5ctflv//3jBOmAHfWcfFzw7ZrCtqTeTua1fToW5PbdnQ==">
+    <input placeholder="New Tank" class="uk-input" type="text" name="sample[tank]" id="sample_tank">
+    <input placeholder="Lot ID" class="uk-input" type="text" name="sample[lot_id]" id="sample_lot_id"><br>
+    <span class="form"><select class="uk-form-width-small" name="sample[sample_size]" id="sample_sample_size"><option value="250mL">250mL</option>
+  <option value="375mL">375mL</option>
+  <option value="750mL">750mL</option></select>
+    <input type="submit" name="commit" value="Add Sample" data-disable-with="Add Sample">
+  </span></form><br>
+
+  <div class="uk-form-stacked">
+  <span><%= form_tag import_request_samples_path(@request, params[:sample_size]), multipart: true do |f| %>
+    
+    <div class="uk-margin" uk-margin>
+    <img src="https://png.icons8.com/color/64/000000/xls.png">
+          <div uk-form-custom="target: true">
+              <input type="file" id="file" name="file" uk-tooltip="title: Select CSV File to Import">
+              <input class="uk-input uk-form-width-medium"  type="text" placeholder="Select file" disabled>
+          </div>
+        
+  <span class ="import" uk-tooltip="title: Import Samples from CSV File"><%= submit_tag "Import" %>--<%= select_tag( :sample_size, options_for_select(['250mL','375mL','750mL']))%>
+    </div>
+  <% end %></span></span>
+
+  </div>
+<%end%>

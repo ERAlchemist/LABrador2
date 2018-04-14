@@ -1,0 +1,61 @@
+<p id="notice"><%= notice %></p>
+
+<h2 class="request_title"><%= @request.title %></h2>
+<p class="sub"><%= @request.description %><br><br>
+ Due Date: <%= @request.due_date.strftime("%A, %B %d") %><br>
+ <%if @request.is_recurring%>
+ Recurring: <%=@request.is_recurring %><br>
+ Interval: <%=@request.recurrence_interval%> days
+<%end%><br>
+
+ 	<% if !@request.time_completed %>
+	
+	 <span uk-icon="file-edit" uk-tooltip="title: Edit Request Details" ><%= link_to edit_request_path(@request) do  %>
+	 <br>
+	 <%=image_tag("edit.png")%>
+	 </span>
+	
+	<%end%>
+	
+
+<div class="closed-link" >
+<%= link_to close_out_request_path(@request), method: :patch do %>
+	<span uk-tooltip="title: Close-Out Request"><%=image_tag("complete-64.png") %><br>Close Out</span>
+	<% end %>
+</div>
+<%else%>
+<div class="closed-link"uk-tooltip="title: Re-Open Request" >
+	<%= link_to reopen_request_path(@request), method: :patch do %>
+		<%=image_tag("Write_64.png") %><br>Re-Open
+	<% end %></p>
+</div>
+<%end%></p>
+
+
+
+<div id="samples_wrapper">
+
+	<%if @request.time_completed%>
+	
+		<%= render "samples/close"%>
+	
+	<%else%>
+	<p class="uk-text-primary"><%= @request.samples.count %> samples</p>
+		<% samples = @request.samples.sort_by{|h| h.tank.to_i} %>
+		
+		<%= render samples  %>
+		
+	
+	<%end%>
+		
+	<div id="form">
+		<%= render "samples/form" %>
+	</div>
+</div>
+
+<div class="links">
+	<%= link_to 'Edit', edit_request_path(@request) %> |
+	<%= link_to 'Delete', request_path(@request), method: :delete, data: { confirm: "Are you sure?" }%> |
+    <%= link_to 'Back', requests_path %> |
+	<a href="/schedule?start_date=<%=Time.zone.now.strftime("%Y-%m-%d")%>">Schedule</a>
+</div>

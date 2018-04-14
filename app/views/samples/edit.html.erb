@@ -1,0 +1,6 @@
+<%= form_for([@request, @request.samples.build]) do |f| %>
+  <%= f.text_field :tank,  placeholder: "New Tank" %>
+  <%= f.text_field :lot_id,  placeholder: "Lot ID" %>
+  <%= f.select :sample_size, ['250mL', '375mL','750mL'] %>
+  <%= f.submit "Add Sample" %><br>
+<% end %><br>

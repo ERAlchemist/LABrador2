@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html class="main-bd">
+<head>
+<title>LABrador</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+<meta http-equiv="content-type" content="text/html;charset=iso-8859-1" />
+<meta name="author" content="www.frebsite.nl" />
+<meta name="viewport" content="width=device-width initial-scale=1.0 maximum-scale=1.0 user-scalable=yes" />
+<meta name="robots" content="noindex, nofollow" />
+<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+ <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://www.jqueryscript.net/demo/Slick-App-Like-Sliding-Menu-Plugin-With-jQuery-Mmenu/jquery.mmenu.js"></script>
+<script type="text/javascript">
+			$(function() {
+				$('nav#menu').mmenu();
+			});
+		</script>
+</head>
+<body class="main-bd">
+<div   id="page">
+  <div   id="header"> 
+    <a href="#menu"></a>
+      <div  >
+        <%=image_tag("wine_f3.png") %>
+        <%=image_tag("small_logo.png") %>
+     </div>
+  </div>
+    <div class="container1">
+        <%= yield %>
+    </div>
+  <nav  id="menu">
+  <img class="back" src="https://d30y9cdsu7xlg0.cloudfront.net/png/57198-200.png">
+    <ul>
+      <li><a href="/schedule"><%=image_tag('Schedule-128.png')%>Sampling Schedule</a></li>
+      <li><%= link_to requests_path do %>
+            <%=image_tag('request_128.png')%>Requests
+          <%end%>
+      </li>
+      <li>
+          <%= link_to new_request_path do %>
+            <%= image_tag('doc_add_128.png')%>New Request
+          <%end%>
+      </li>
+    </ul>
+  </nav>
+</div>
+</body>
+</html>

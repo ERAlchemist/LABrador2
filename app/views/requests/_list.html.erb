@@ -1,0 +1,16 @@
+<% @requests.each do |request| %>
+  
+    <div id="completed" class="index_row clearfix">
+      <%if request.completed?%>
+        <h2 class="request_title"><strike><%= link_to request.title, request %></strike></h2>
+      <p class="request_sub_title"><strike><%= request.description %></strike><br>
+                    Due: <%= request.due_date.strftime("%A, %B %d")%><br>
+            Completed: <%= request.time_completed.strftime("%A, %B %d")%></p>
+      <%else%>
+      <h2 class="request_title"><%= link_to request.title, request %></h2>
+      <p class="request_sub_title"><%= request.description %><br>
+              <%= request.due_date.strftime("%A, %B %d")%></p>
+  
+    <%end%>
+    </div>
+<% end %>

@@ -1,0 +1,19 @@
+
+<div class="filter-bar">
+
+  <p><label>Show Completed</label><input type="checkbox" class="uk-checkbox" name="show-complete" id="show-complete" value="show-complete" checked="yes">  ||
+  <label>Show Incomplete</label><input type="checkbox" class="uk-checkbox" name="show-incomplete" id="show-incomplete" value="show-incomplete" checked="yes"></p>
+</div>
+
+<div id="incomplete-list" class="hidden">
+  <div class="request-label">Incomplete Requests</div>
+    <%= render(partial: 'requests/incomplete') %>
+</div>
+<div id="complete-list" class="hidden">
+  <div class="request-label">Completed Requests</div>
+    <%= render(partial: 'requests/complete') %>
+</div>
+
+<div class="links">
+ <%=image_tag("doc-add-64.png")%> <%= link_to "New Request", new_request_path %>
+</div>
